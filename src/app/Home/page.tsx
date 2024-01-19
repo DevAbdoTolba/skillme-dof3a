@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Data from "./Data";
+import Header from "../util/header";
 /* 
     {
 spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
@@ -50,6 +51,7 @@ export default function Home() {
   return (
     !loading && (
       <>
+        <Header data={data} setData={setData} />
         <Data data={data} />
       </>
     )

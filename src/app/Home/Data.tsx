@@ -60,7 +60,7 @@ export default function Data({ data }: Props) {
   return (
     <DataGrid
       sx={{
-        height: "100dvh",
+        height: "92dvh",
         "& .MuiDataGrid-row": {
           transition: "all 0.2s  ease-in-out",
         },
