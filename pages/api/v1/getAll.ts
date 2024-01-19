@@ -28,7 +28,7 @@ export default async function handler(
   const client = await auth.getClient();
   const sheets = google.sheets({
     version: "v4",
-    auth: client,
+    auth: client as any,
   }) as sheets_v4.Sheets;
 
   const response = await sheets.spreadsheets.values.batchGet({
