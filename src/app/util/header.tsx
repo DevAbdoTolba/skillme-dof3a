@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { Menu, MenuItem } from "@mui/material";
+import { Box, Menu, MenuItem } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Link from "next/link";
 
@@ -100,21 +100,26 @@ export default function Header({ data, setData }: Props) {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu> */}
-        <Typography
-          variant="h6"
-          component={"a"}
+        <Box
           sx={{
             flexGrow: 1,
-            textDecoration: "none",
-            "&:hover": {
-              textDecoration: "none",
-            },
           }}
-          href="/"
-          color="white"
         >
-          Skill Me
-        </Typography>
+          <Typography
+            variant="h6"
+            component={"a"}
+            href="/"
+            color="white"
+            sx={{
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "none",
+              },
+            }}
+          >
+            Skill Me
+          </Typography>
+        </Box>
 
         <IconButton
           size="large"
