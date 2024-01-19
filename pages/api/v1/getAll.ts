@@ -1,11 +1,36 @@
 import { google, sheets_v4 } from "googleapis";
 import { NextApiRequest, NextApiResponse } from "next";
-
+function toPascalCase(str: string) {
+  const matches = str.match(/[a-z]+/gi);
+  if (matches) {
+    return matches
+      .map(function (word: string) {
+        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+      })
+      .join("");
+  }
+  return "";
+}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { range } = req.query;
+  // interface Data {
+  //   spreadsheetId: string;
+  //   valueRanges: ValueRange[];
+  // }
+
+  // interface ValueRange {
+  //   range: string;
+  //   majorDimension: string;
+  //   values: string[][];
+  // }
+
+  interface ReturnData {
+    [key: string]: string;
+  }
+
+  // const { range } = req.query;
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -33,7 +58,7 @@ export default async function handler(
 
   const response = await sheets.spreadsheets.values.batchGet({
     spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
-    ranges: [range as string],
+    ranges: ["sheet!A2:Z90"],
   });
 
   // remove any empty rows
@@ -51,12 +76,35 @@ export default async function handler(
   const data = response.data as Data;
   const values = data.valueRanges[0].values;
 
+  // const headers = values[0];
+  // console.log("🚀 ~ headers:", headers);
+
+  // trim all spaces in headers
+  // const headers = values[0].map((header) => header.replace(/\s/g, ""));
+
+  //! trim all spaces in headers and make it in PascalCase
+  // const headers = values[0].map((header) => {
+  //   header = header.replace(/\s/g, "");
+  //   return header.charAt(0).toUpperCase() + header.slice(1);
+  // });
+
+  // using the function
+  // let headers = values[0].map((header) => toPascalCase(header));
+
   const filteredValues = values.map((row) => {
     row = row.filter(
       (cell) => cell !== undefined && cell !== null && cell !== ""
     );
     return row;
   });
+
+  // let objects = filteredValues.slice(1).map((row) => {
+  //   let obj: ReturnData = {};
+  //   headers.forEach((header, i) => {
+  //     obj[header] = row[i];
+  //   });
+  //   return obj;
+  // });
 
   res.status(200).json(filteredValues);
 }
