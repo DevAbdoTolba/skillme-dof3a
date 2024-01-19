@@ -100,7 +100,19 @@ export default function Header({ data, setData }: Props) {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu> */}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          component={"a"}
+          sx={{
+            flexGrow: 1,
+            textDecoration: "none",
+            "&:hover": {
+              textDecoration: "none",
+            },
+          }}
+          href="/"
+          color="white"
+        >
           Skill Me
         </Typography>
 
