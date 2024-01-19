@@ -1,5 +1,5 @@
 "use client";
-import Home from "./Home/page";
+import Data from "./Data/page";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -13,7 +13,7 @@ export default function Main() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Home />
+        <Data />
       </ThemeProvider>
     </>
   );

@@ -8,6 +8,9 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { Menu, MenuItem } from "@mui/material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import Link from "next/link";
 
 interface Props {
   data: string[][];
@@ -56,6 +59,16 @@ export default function Header({ data, setData }: Props) {
       },
     },
   }));
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar
       position="static"
@@ -64,19 +77,48 @@ export default function Header({ data, setData }: Props) {
       }}
     >
       <Toolbar>
+        {/* <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+          onClick={handleClick}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu> */}
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Skill Me
+        </Typography>
+
         <IconButton
           size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
+          LinkComponent={Link}
+          target="_blank"
+          href="https://forms.gle/aPy7Ak15BJVDfXSm9"
         >
-          <MenuIcon />
+          <PersonAddIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
-        </Typography>
-        <Search>
+
+        {/* // ! Not working search yet!! */}
+        {/* <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -87,7 +129,7 @@ export default function Header({ data, setData }: Props) {
               data.filter((row) => {});
             }}
           />
-        </Search>
+        </Search> */}
       </Toolbar>
     </AppBar>
   );

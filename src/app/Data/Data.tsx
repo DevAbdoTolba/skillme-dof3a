@@ -63,11 +63,19 @@ export default function Data({ data }: Props) {
         height: "92dvh",
         "& .MuiDataGrid-row": {
           transition: "all 0.2s  ease-in-out",
+
+          "&:hover": {
+            cursor: "pointer",
+            transform: "scale(1.02) translate(8px, -2px)",
+            transition: "all 0s  ease-in-out",
+          },
+          "&:active": {
+            transform: "scale(1.0) translate(0px, -1px)",
+            transition: "all 0s  ease-in-out",
+          },
         },
-        "& .MuiDataGrid-row:hover ": {
-          cursor: "pointer",
-          transform: "scale(1.02) translate(8px, -1px)",
-          transition: "all 0s  ease-in-out",
+        "& .MuiDataGrid-cell:focus": {
+          outline: "none",
         },
       }}
       disableRowSelectionOnClick

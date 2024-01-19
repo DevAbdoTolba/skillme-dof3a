@@ -35,7 +35,7 @@ https://github.com/DevAbdoTolba/AAA-AAST-WEB_Project",
 }
     */
 
-export default function Home() {
+export default function Main() {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<string[][]>([]);
 
@@ -52,6 +52,7 @@ export default function Home() {
     !loading && (
       <>
         <Header data={data} setData={setData} />
+
         <Data data={data} />
       </>
     )
