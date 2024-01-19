@@ -36,5 +36,27 @@ export default async function handler(
     ranges: [range as string],
   });
 
-  res.status(200).json(response.data);
+  // remove any empty rows
+  interface ValueRange {
+    range: string;
+    majorDimension: string;
+    values: string[][];
+  }
+
+  interface Data {
+    spreadsheetId: string;
+    valueRanges: ValueRange[];
+  }
+
+  const data = response.data as Data;
+  const values = data.valueRanges[0].values;
+
+  const filteredValues = values.map((row) => {
+    row = row.filter(
+      (cell) => cell !== undefined && cell !== null && cell !== ""
+    );
+    return row;
+  });
+
+  res.status(200).json(filteredValues);
 }
