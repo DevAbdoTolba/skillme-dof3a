@@ -92,7 +92,8 @@ export default function Data({ data }: Props) {
       rows={rows}
       columns={columns}
       onRowClick={(row) => {
-        console.log("🚀 ~ Data ~ row:", row.id);
+        console.log("🚀 ~ row ~ row", row);
+        window.location.href = `/profile/${row.row.id}`;
       }}
     />
   );

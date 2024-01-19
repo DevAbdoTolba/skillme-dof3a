@@ -44,17 +44,17 @@ export default function Main() {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
+        setLoading(false);
       });
-    setLoading(false);
   }, []);
 
-  return (
-    !loading && (
-      <>
-        <Header data={data} setData={setData} />
+  return loading ? (
+    "Loading"
+  ) : (
+    <>
+      <Header data={data} setData={setData} />
 
-        <Data data={data} />
-      </>
-    )
+      <Data data={data} />
+    </>
   );
 }
