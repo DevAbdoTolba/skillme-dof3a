@@ -8,26 +8,26 @@ interface Props {
 }
 
 export default function Data({ data }: Props) {
-  console.log("🚀 ~ Data ~ data:", data);
+  // console.log("🚀 ~ Data ~ data:", data);
   // Timestamp	Email Address	Full name	Linkedin account	Github account	Governorate	Experience at	Name what you have experience in	Your Job title	A Breife detail about you expreince	Your projects links	Your Certificates	Job title	Breife detail about you expreince	Projects links	Certificates
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     // { field: "Timestamp", headerName: "Timestamp", width: 200 },
-    { field: "FullName", headerName: "Full name", width: 200 },
+    { field: "Full name", headerName: "Full name", width: 200 },
     // { field: "EmailAddress", headerName: "Email Address", width: 200 },
-    { field: "ExperienceAt", headerName: "Experience at", width: 200 },
-    { field: "JobTitle", headerName: "Job title", width: 200 },
+    { field: "Experience at", headerName: "Experience at", width: 200 },
+    { field: "Job title", headerName: "Job title", width: 200 },
     {
-      field: "LinkedinAccount",
+      field: "Linkedin account",
       headerName: "Linkedin account",
       width: 200,
     },
-    { field: "GithubAccount", headerName: "Github account", width: 200 },
+    { field: "Github account", headerName: "Github account", width: 200 },
     { field: "Governorate", headerName: "Governorate", width: 200 },
 
     {
-      field: "BriefDetailAboutYourExperience",
+      field: "Brief detail about you experience",
       headerName: "Brief detail about you experience",
       width: 200,
     },
@@ -36,23 +36,12 @@ export default function Data({ data }: Props) {
   ];
 
   //   add id to rows data
-  const rows = data.map((row, index) => {
-    /*
-    
-    */
+  const rows = data.map((item, index) => {
+    // check any empty cells and replace with "N/A"
+
     return {
       id: index,
-      Timestamp: row[0],
-      EmailAddress: row[1],
-      FullName: row[2],
-      LinkedinAccount: row[3],
-      GithubAccount: row[4],
-      Governorate: row[5],
-      ExperienceAt: row[6],
-      JobTitle: row[7],
-      BriefDetailAboutYourExperience: row[8],
-      ProjectsLinks: row[9],
-      Certificates: row[10],
+      ...item,
     };
   });
   console.log("🚀 ~ rows ~ rows:", rows);
