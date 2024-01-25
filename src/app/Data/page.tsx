@@ -1,12 +1,9 @@
 "use client";
-import { Alert, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
+import Link from "next/link";
 import React, { useEffect } from "react";
 
 export default function Page() {
-  useEffect(() => {
-    window.location.href = "/";
-  }, []);
-
   return (
     <>
       <Alert severity="error">
@@ -26,6 +23,9 @@ export default function Page() {
         wait to welcome you in properly.
      `}
       </Alert>
+      <Link href="/">
+        <a>Go back home</a>
+      </Link>
     </>
   );
 }
