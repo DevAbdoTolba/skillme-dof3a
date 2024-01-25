@@ -39,6 +39,7 @@ interface Props {
   valid: boolean;
 }
 
+
 export default function Main({ valid }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<string[][]>([]);
