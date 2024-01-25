@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 
 interface Props {
   data: string[][];
@@ -95,6 +95,11 @@ export default function Data({ data }: Props) {
         console.log("🚀 ~ row ~ row", row);
         window.location.href = `/profile/${row.row.id}`;
       }}
+      // add a button down
+      // components={{
+      //   Toolbar: GridToolbar,
+
+      // }}
     />
   );
 }

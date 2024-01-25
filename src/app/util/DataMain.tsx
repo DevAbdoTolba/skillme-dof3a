@@ -1,7 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
-import Data from "./Data";
-import Header from "../util/header";
+import { useEffect, useState, lazy } from "react";
+
+const Data = lazy(() => import("./Data"));
+const Header = lazy(() => import("./header"));
+
 /* 
     {
 spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
@@ -39,7 +41,6 @@ interface Props {
   valid: boolean;
 }
 
-
 export default function Main({ valid }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<string[][]>([]);
@@ -51,6 +52,13 @@ export default function Main({ valid }: Props) {
         setData(data);
         setLoading(false);
       });
+
+    // listen for refreash or leave the page
+
+    window.addEventListener("beforeunload", (e) => {
+      e.returnValue =
+        "Are you sure you want to leave? you will need to re-enter the captcha again";
+    });
   }, []);
 
   return valid ? (
