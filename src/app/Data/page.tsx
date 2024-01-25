@@ -35,7 +35,11 @@ https://github.com/DevAbdoTolba/AAA-AAST-WEB_Project",
 }
     */
 
-export default function Main() {
+interface Props {
+  valid: boolean;
+}
+
+export default function Main({ valid }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<string[][]>([]);
 
@@ -48,13 +52,22 @@ export default function Main() {
       });
   }, []);
 
-  return loading ? (
-    "Loading"
+  return valid ? (
+    loading ? (
+      "Loading"
+    ) : (
+      <>
+        <Header data={data} setData={setData} />
+
+        <Data data={data} />
+      </>
+    )
   ) : (
     <>
-      <Header data={data} setData={setData} />
-
-      <Data data={data} />
+      {(() => {
+        window.location.href = "/";
+        return <>hello</>;
+      })()}
     </>
   );
 }
