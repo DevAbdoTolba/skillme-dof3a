@@ -3,7 +3,9 @@ import { Alert, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 
 export default function Page() {
-  window.location.href = "/";
+  useEffect(() => {
+    window.location.href = "/";
+  }, []);
 
   return (
     <>
