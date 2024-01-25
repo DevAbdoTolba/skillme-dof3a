@@ -15,17 +15,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // interface Data {
-  //   spreadsheetId: string;
-  //   valueRanges: ValueRange[];
-  // }
-
-  // interface ValueRange {
-  //   range: string;
-  //   majorDimension: string;
-  //   values: string[][];
-  // }
-
   interface ReturnData {
     [key: string]: string;
   }
@@ -56,33 +45,33 @@ export default async function handler(
     auth: client as any,
   }) as sheets_v4.Sheets;
 
-  const response = await sheets.spreadsheets.values.batchGet({
+  // const response = await sheets.spreadsheets.values.batchGet({
+  //   spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
+  //   ranges: ["sheet!A1:Z90"],
+  // });
+
+  const response = await sheets.spreadsheets.values.get({
     spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
-    ranges: ["sheet!A2:Z90"],
+    range: "sheet!A1:Z90",
   });
 
   // remove any empty rows
-  interface ValueRange {
+
+  interface Data {
     range: string;
     majorDimension: string;
     values: string[][];
   }
 
-  interface Data {
-    spreadsheetId: string;
-    valueRanges: ValueRange[];
-  }
-
   const data = response.data as Data;
-  const values = data.valueRanges[0].values;
+  const values = data.values;
 
-  // const headers = values[0];
-  // console.log("🚀 ~ headers:", headers);
+  const headers = values[0];
 
   // trim all spaces in headers
   // const headers = values[0].map((header) => header.replace(/\s/g, ""));
 
-  //! trim all spaces in headers and make it in PascalCase
+  // //! trim all spaces in headers and make it in PascalCase
   // const headers = values[0].map((header) => {
   //   header = header.replace(/\s/g, "");
   //   return header.charAt(0).toUpperCase() + header.slice(1);
@@ -91,20 +80,20 @@ export default async function handler(
   // using the function
   // let headers = values[0].map((header) => toPascalCase(header));
 
-  const filteredValues = values.map((row) => {
-    row = row.filter(
-      (cell) => cell !== undefined && cell !== null && cell !== ""
-    );
-    return row;
-  });
-
-  // let objects = filteredValues.slice(1).map((row) => {
-  //   let obj: ReturnData = {};
-  //   headers.forEach((header, i) => {
-  //     obj[header] = row[i];
-  //   });
-  //   return obj;
+  // const filteredValues = values.map((row) => {
+  //   row = row.filter(
+  //     (cell) => cell !== undefined && cell !== null && cell !== ""
+  //   );
+  //   return row;
   // });
 
-  res.status(200).json(filteredValues);
+  let objects = values.slice(1).map((row) => {
+    let obj: ReturnData = {};
+    headers.forEach((header, i) => {
+      obj[header] = row[i] || "";
+    });
+    return obj;
+  });
+
+  res.status(200).json(objects);
 }
