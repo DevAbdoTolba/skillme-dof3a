@@ -5,7 +5,8 @@ import React, { useEffect } from "react";
 
 export default function Page() {
   function returnToHome() {
-    window.location.href = "/";
+    if (typeof window === "undefined") return;
+    else window.location.href = "/";
   }
   returnToHome();
   return (
