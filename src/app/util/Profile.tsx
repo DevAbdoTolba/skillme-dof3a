@@ -85,8 +85,12 @@ export default function Profile({ data, open, setOpen }: Props) {
           <Link href={`https://wa.me/${data["Phone number"]}`} target="_blank">
             Phone number : {data["Phone number"]} <br />
           </Link>
-          Linkedin account : {data["Linkedin account"]} <br />
-          Github account : {data["Github account"]} <br />
+          <Link href={data["Linkedin account"]} target="_blank">
+            Linkedin account : {data["Linkedin account"]} <br />
+          </Link>
+          <Link href={data["Github account"]} target="_blank">
+            Github account : {data["Github account"]} <br />
+          </Link>
           Governorate : {data["Governorate"]} <br />
           Experience at : {data["Experience at"]} <br />
           Job title : {data["Job title"]} <br />
