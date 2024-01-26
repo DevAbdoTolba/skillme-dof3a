@@ -1,5 +1,7 @@
 "use client";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState, lazy } from "react";
+import Loader from "./Loader";
 
 const Data = lazy(() => import("./Data"));
 const Header = lazy(() => import("./header"));
@@ -55,15 +57,32 @@ export default function Main({ valid }: Props) {
 
     // listen for refreash or leave the page
 
-    window.addEventListener("beforeunload", (e) => {
-      e.returnValue =
-        "Are you sure you want to leave? you will need to re-enter the captcha again";
-    });
+    // window.addEventListener("beforeunload", (e) => {
+    //   // e.preventDefault();
+    //   e.returnValue =
+    //     "Are you sure you want to leave? you will need to re-enter the captcha again";
+    // });
   }, []);
 
   return valid ? (
     loading ? (
-      "Loading"
+      <>
+        <Loader />
+        <Box
+          // center
+          sx={{
+            position: "absolute",
+            top: "80%",
+
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Typography variant="h6" align="center">
+            Loading...
+          </Typography>
+        </Box>
+      </>
     ) : (
       <>
         <Header data={data} setData={setData} />

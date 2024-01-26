@@ -82,7 +82,6 @@ export default function Data({ data }: Props) {
       columns={columns}
       onRowClick={(row) => {
         console.log("🚀 ~ row ~ row", row);
-        window.location.href = `/profile/${row.row.id}`;
       }}
       // add a button down
       // components={{

@@ -7,9 +7,7 @@ export default function Page() {
   function returnToHome() {
     window.location.href = "/";
   }
-  useEffect(() => {
-    returnToHome();
-  }, []);
+  returnToHome();
   return (
     <Box
       display={"flex"}
