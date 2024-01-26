@@ -33,7 +33,7 @@ export default function Main() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header data={data} setData={setData} />
+        <Header />
         <div>{data}</div>;
       </ThemeProvider>
     </>

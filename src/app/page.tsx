@@ -14,7 +14,6 @@ export default function Main() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(captcha);
     if (captcha) {
       console.log("captcha is valid");
     } else {

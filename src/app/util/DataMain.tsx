@@ -43,9 +43,60 @@ interface Props {
   valid: boolean;
 }
 
+// interface DataType {
+//   data: {
+//     Timestamp: string;
+//     "Email Address": string;
+//     "Full name": string;
+//     "Linkedin account": string;
+//     "Github account": string;
+//     Governorate: string;
+//     "Experience at": string;
+//     "Name what you have experience in": string;
+//     "Your Job title": string;
+//     "A Breife detail about you expreince": string;
+//     "Your projects links": string;
+//     "Your Certificates": string;
+//     "Job title": string;
+//     "Breife detail about you expreince": string;
+//     "Projects links": string;
+//     Certificates: string;
+//   }[];
+// }
+
+type DataType = {
+  Timestamp: string;
+  "Email Address": string;
+  "Full name": string;
+  "Linkedin account": string;
+  "Github account": string;
+  Governorate: string;
+  "Experience at": string;
+  "Job title": string;
+  "Brief detail about you experience": string;
+  "Projects links": string;
+  Certificates: string;
+  "Phone number": string;
+}[];
+
 export default function Main({ valid }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<string[][]>([]);
+  const [data, setData] = useState<DataType>([
+    {
+      Timestamp: "",
+      "Email Address": "",
+      "Full name": "",
+      "Linkedin account": "",
+      "Github account": "",
+      Governorate: "",
+      "Experience at": "",
+      "Job title": "",
+      "Brief detail about you experience": "",
+      "Projects links": "",
+      Certificates: "",
+      "Phone number": "",
+    },
+  ]);
 
   useEffect(() => {
     fetch("/api/v1/getAll?range=sheet!A2:Z90")
@@ -63,6 +114,8 @@ export default function Main({ valid }: Props) {
     //     "Are you sure you want to leave? you will need to re-enter the captcha again";
     // });
   }, []);
+
+  console.log(data);
 
   return valid ? (
     loading ? (
@@ -85,7 +138,7 @@ export default function Main({ valid }: Props) {
       </>
     ) : (
       <>
-        <Header data={data} setData={setData} />
+        <Header />
 
         <Data data={data} />
       </>

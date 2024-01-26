@@ -12,12 +12,7 @@ import { Box, Menu, MenuItem } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Link from "next/link";
 
-interface Props {
-  data: string[][];
-  setData: React.Dispatch<React.SetStateAction<string[][]>>;
-}
-
-export default function Header({ data, setData }: Props) {
+export default function Header() {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,

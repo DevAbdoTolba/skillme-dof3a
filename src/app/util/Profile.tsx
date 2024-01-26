@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -18,16 +19,30 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+type DataTypeForRow = {
+  id: number;
+  Timestamp: string;
+  "Email Address": string;
+  "Full name": string;
+  "Linkedin account": string;
+  "Github account": string;
+  Governorate: string;
+  "Experience at": string;
+  "Job title": string;
+  "Brief detail about you experience": string;
+  "Projects links": string;
+  Certificates: string;
+  "Phone number": string;
+};
 interface Props {
-  data: string[][];
+  data: DataTypeForRow;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Profile({ data }: Props) {
-  const [open, setOpen] = React.useState(false);
+export default function Profile({ data, open, setOpen }: Props) {
+  // const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -35,6 +50,7 @@ export default function Profile({ data }: Props) {
   return (
     <React.Fragment>
       <BootstrapDialog
+        scroll={"paper"}
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
@@ -54,22 +70,30 @@ export default function Profile({ data }: Props) {
         >
           <CloseIcon />
         </IconButton>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-            auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-            dui. Donec ullamcorper nulla non metus auctor fringilla.
-          </Typography>
+        <DialogContent
+          dividers
+          sx={{
+            "& a": {
+              color: "white",
+            },
+          }}
+        >
+          Full name : {data["Full name"]} <br />
+          <Link href={`mailto:${data["Email Address"]}`} target="_blank">
+            Email Address : {data["Email Address"]} <br />
+          </Link>
+          <Link href={`https://wa.me/${data["Phone number"]}`} target="_blank">
+            Phone number : {data["Phone number"]} <br />
+          </Link>
+          Linkedin account : {data["Linkedin account"]} <br />
+          Github account : {data["Github account"]} <br />
+          Governorate : {data["Governorate"]} <br />
+          Experience at : {data["Experience at"]} <br />
+          Job title : {data["Job title"]} <br />
+          Brief detail about you experience :{" "}
+          {data["Brief detail about you experience"]} <br />
+          Projects links : {data["Projects links"]} <br />
+          Certificates : {data["Certificates"]} <br />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

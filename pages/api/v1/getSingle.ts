@@ -80,9 +80,7 @@ export default async function handler(
     version: "v4",
     auth: client as any,
   }) as sheets_v4.Sheets;
-  console.log(
-    `sheet!A${(rowNumbered as number) + 2}:Z${(rowNumbered as number) + 2}`
-  );
+
 
   const response = await sheets.spreadsheets.values.batchGet({
     spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
@@ -123,7 +121,7 @@ export default async function handler(
   let filteredValues;
 
   try {
-    console.log(values);
+ 
     filteredValues = values.map((row) => {
       row = row.filter(
         (cell) => cell !== undefined && cell !== null && cell !== ""

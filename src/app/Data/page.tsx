@@ -2,7 +2,7 @@
 import { Alert, Box, Button } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect } from "react";
-
+import DataMain from "../util/DataMain";
 export default function Page() {
   function returnToHome() {
     if (typeof window === "undefined") return;
@@ -18,6 +18,7 @@ export default function Page() {
       gap={2}
       flexDirection={"column"}
     >
+      {/* <DataMain valid={true} /> */}
       <Alert severity="error">
         {`
         Hold on just a sec, love! Seems like your access request got tangled up
