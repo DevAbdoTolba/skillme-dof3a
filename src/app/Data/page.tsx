@@ -1,11 +1,24 @@
 "use client";
-import { Alert } from "@mui/material";
+import { Alert, Box, Button } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
 export default function Page() {
+  function returnToHome() {
+    window.location.href = "/";
+  }
+  useEffect(() => {
+    returnToHome();
+  }, []);
   return (
-    <>
+    <Box
+      display={"flex"}
+      width={"100vw"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      gap={2}
+      flexDirection={"column"}
+    >
       <Alert severity="error">
         {`
         Hold on just a sec, love! Seems like your access request got tangled up
@@ -23,9 +36,16 @@ export default function Page() {
         wait to welcome you in properly.
      `}
       </Alert>
-      <Link href="/">
-        <a>Go back home</a>
-      </Link>
-    </>
+      <Button
+        href="/"
+        variant="contained"
+        color="primary"
+        sx={{
+          width: "fit-content",
+        }}
+      >
+        Go Back Home
+      </Button>
+    </Box>
   );
 }
