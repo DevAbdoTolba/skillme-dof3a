@@ -1,6 +1,7 @@
 "use client";
 
-import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+
 import { Inter } from "next/font/google";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -39,6 +40,7 @@ export default function RootLayout({
           <CssBaseline />
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
