@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box, Menu, MenuItem } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Link from "next/link";
+import DribbleButton from "./DribbleButton";
 
 export default function Header() {
   const Search = styled("div")(({ theme }) => ({
@@ -63,6 +64,20 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [dribble, setDribble] = React.useState(false);
+
+  React.useEffect(() => {
+    // check local storage for visitedForm key
+    const visitedForm = window.localStorage.getItem("visitedForm");
+    console.log("🚀 ~ React.useEffect ~ visitedForm:", visitedForm);
+
+    if (!visitedForm) {
+      setDribble(true);
+    } else {
+      setDribble(false);
+    }
+  }, []);
 
   return (
     <AppBar
@@ -122,11 +137,31 @@ export default function Header() {
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
-          LinkComponent={Link}
-          target="_blank"
-          href="https://forms.gle/aPy7Ak15BJVDfXSm9"
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.localStorage.setItem("visitedForm", "true");
+            }
+            setDribble(false);
+            window.open("https://forms.gle/aPy7Ak15BJVDfXSm9", "_blank");
+          }}
+
+          // LinkComponent={Link}
+          // target="_blank"
+          // href="https://forms.gle/aPy7Ak15BJVDfXSm9"
         >
-          <PersonAddIcon />
+          <Box
+            sx={{
+              position: "absolute",
+              zIndex: 1,
+            }}
+          >
+            <DribbleButton dribble={dribble} />
+          </Box>
+          <PersonAddIcon
+            sx={{
+              zIndex: 2,
+            }}
+          />
         </IconButton>
 
         {/* // ! Not working search yet!! */}
