@@ -141,6 +141,13 @@ export default function Data({ data }: Props) {
         columns={columns}
         onRowClick={(row) => {
           setProfileRow(row.row);
+          if (typeof window !== "undefined") {
+            history.pushState(
+              { id: "name" },
+              "",
+              `Data/${row.row["Full name"]}`
+            );
+          }
           setOpen(true);
         }}
 

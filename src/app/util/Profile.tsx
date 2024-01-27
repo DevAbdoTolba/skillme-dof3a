@@ -44,6 +44,7 @@ export default function Profile({ data, open, setOpen }: Props) {
   // const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
+    history.back();
     setOpen(false);
   };
 
