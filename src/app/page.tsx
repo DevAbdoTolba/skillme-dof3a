@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { InfoOpenContext } from "./layout";
+import { InfoOpenContext } from "./context/InfoOpenContext";
 
 import DataPage from "./util/DataMain";
 import Image from "next/image";

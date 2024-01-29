@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { Alert, CssBaseline, Snackbar } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { InfoOpenContext } from "./context/InfoOpenContext";
+
 import "./layout.css";
 
 const theme = createTheme({
@@ -19,7 +21,6 @@ const inter = Inter({ subsets: ["latin"] });
 //   title: "Skill me",
 //   description: "Application to help you learn new skills",
 // };
-export const InfoOpenContext = React.createContext("" as any);
 
 export default function RootLayout({
   children,
