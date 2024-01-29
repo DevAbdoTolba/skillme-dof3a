@@ -1,16 +1,52 @@
 "use client";
+import React from "react";
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { InfoOpenContext } from "./layout";
 
 import DataPage from "./util/DataMain";
 import Image from "next/image";
 
 import "./page.css";
 
+type DataType = {
+  Timestamp: string;
+  "Email Address": string;
+  "Full name": string;
+  "Linkedin account": string;
+  "Github account": string;
+  Governorate: string;
+  "Experience at": string;
+  "Job title": string;
+  "Brief detail about you experience": string;
+  "Projects links": string;
+  Certificates: string;
+  "Phone number": string;
+}[];
+
 export default function Main() {
   const [captcha, setCaptcha] = useState<string | null>(null);
   const [valid, setValid] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const { setOpen, setSeverity, setMessage } =
+    React.useContext(InfoOpenContext);
+  const [data, setData] = useState<DataType>([
+    {
+      Timestamp: "",
+      "Email Address": "",
+      "Full name": "",
+      "Linkedin account": "",
+      "Github account": "",
+      Governorate: "",
+      "Experience at": "",
+      "Job title": "",
+      "Brief detail about you experience": "",
+      "Projects links": "",
+      Certificates: "",
+      "Phone number": "",
+    },
+  ]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,10 +58,38 @@ export default function Main() {
   };
 
   useEffect(() => {
+    console.log(captcha);
+
     if (captcha) {
+      setLoading(true);
       setValid(true);
-      // push into location /Data
-      history.pushState({ id: "data" }, "", "Data");
+      fetch("/api/v1/getAll?captchaResponse=" + captcha)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message) {
+            setLoading(false);
+            setValid(false);
+
+            setOpen(true);
+            setSeverity("error");
+            setMessage(data.message);
+          } else {
+            setLoading(false);
+            setValid(true);
+            setData(data);
+          }
+        })
+
+        .catch((err) => {
+          setLoading(false);
+          setValid(false);
+          setOpen(true);
+          setSeverity("error");
+          setMessage("Captcha is not valid");
+        });
+
+      // setValid(true);
+      // history.pushState({ id: "data" }, "", "Data");
     } else {
       setValid(false);
     }
@@ -33,8 +97,14 @@ export default function Main() {
 
   return (
     <>
-      {valid ? (
-        <DataPage valid={valid} />
+      {valid && data ? (
+        <DataPage
+          loading={loading}
+          valid={valid}
+          response={captcha}
+          data={data}
+          setData={setData}
+        />
       ) : (
         <Box
           position={"absolute"}

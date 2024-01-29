@@ -81,7 +81,6 @@ export default async function handler(
     auth: client as any,
   }) as sheets_v4.Sheets;
 
-
   const response = await sheets.spreadsheets.values.batchGet({
     spreadsheetId: "1FiIbZvrED_QvbLdlLECgb1tyqP2MUl5BGyEJRxUcWyA",
     ranges: [
@@ -121,7 +120,6 @@ export default async function handler(
   let filteredValues;
 
   try {
- 
     filteredValues = values.map((row) => {
       row = row.filter(
         (cell) => cell !== undefined && cell !== null && cell !== ""
@@ -142,5 +140,5 @@ export default async function handler(
   //   return obj;
   // });
 
-  res.status(200).json(filteredValues);
+  res.status(200).json(/*filteredValues*/ { data: "no data found" });
 }

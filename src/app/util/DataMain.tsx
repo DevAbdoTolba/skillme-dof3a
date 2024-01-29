@@ -41,6 +41,10 @@ https://github.com/DevAbdoTolba/AAA-AAST-WEB_Project",
 
 interface Props {
   valid: boolean;
+  response: string | null;
+  data: DataType;
+  setData: React.Dispatch<React.SetStateAction<DataType>>;
+  loading: boolean;
 }
 
 // interface DataType {
@@ -79,41 +83,7 @@ type DataType = {
   "Phone number": string;
 }[];
 
-export default function Main({ valid }: Props) {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<DataType>([
-    {
-      Timestamp: "",
-      "Email Address": "",
-      "Full name": "",
-      "Linkedin account": "",
-      "Github account": "",
-      Governorate: "",
-      "Experience at": "",
-      "Job title": "",
-      "Brief detail about you experience": "",
-      "Projects links": "",
-      Certificates: "",
-      "Phone number": "",
-    },
-  ]);
-
-  useEffect(() => {
-    fetch("/api/v1/getAll?range=sheet!A2:Z90")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-
-    // listen for refreash or leave the page
-
-    // window.addEventListener("beforeunload", (e) => {
-    //   // e.preventDefault();
-    //   e.returnValue =
-    //     "Are you sure you want to leave? you will need to re-enter the captcha again";
-    // });
-  }, []);
+export default function Main({ valid, response, data, setData, loading }: Props) {
 
   console.log(data);
 
